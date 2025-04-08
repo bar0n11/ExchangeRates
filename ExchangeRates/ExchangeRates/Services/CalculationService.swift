@@ -12,13 +12,16 @@ protocol CalculationServiceInterface {
 final class CalculationService: CalculationServiceInterface {
     func calculate(cahcedAssets: [CurrencyAsset], with newRates: LatestRates) -> [CurrencyAsset] {
         return cahcedAssets.map { asset in
-            let currentRate = newRates.rates.first { $0.symbol == asset.symbol }?.rate
+            var currentRate = newRates.rates.first { $0.symbol == asset.symbol }?.rate
+            if asset.symbol == BaseAsset.symbol {
+                currentRate = 1.0
+            }
             let previousRate = asset.rate
 
             guard currentRate != previousRate else { return asset }
             
             var copy = asset
-            copy.rate = asset.symbol == BaseAsset.symbol ? 1.0 : currentRate
+            copy.rate = currentRate
             
             let newDelta = calculatePercentageChange(current: currentRate, previous: previousRate)
 

@@ -22,8 +22,6 @@ final class HomeViewModel {
         self.service = service
         self.timer = timer
         
-//        // Oleg: Mocks
-//        AssetsStore().mockPreviousDayAssets()
     }
 
     deinit {

@@ -81,3 +81,16 @@ final class AssetsStore: AssetsStoreInterface {
         }
     }
 }
+
+// MARK: - Mocks
+
+extension AssetsStore {
+    func mockPreviousDayAssets() {
+        let mocks: [CurrencyAsset] = [
+            .init(symbol: "USD", name: "United States Dollar", rate: 1.0, delta: 0.0),
+            .init(symbol: "EUR", name: "Euro", rate: 0.8, delta: 0.0),
+            .init(symbol: "CAD", name: "Canadian Dollar", rate: 1.5, delta: 0.0)
+        ]
+        try? add(assets: mocks)
+    }
+}
